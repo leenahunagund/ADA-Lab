@@ -16,13 +16,13 @@ int largest=i;
 
 int left=2*i*1;
 
-int right=2*i*2;
+int right=2*i+1;
 
 if (left<n && a[left]>a[largest])
 
 	largest=left;
 
-if(right>n && a[right]>a[largest])
+if(right<n && a[right]>a[largest])
 
 	largest=right;
 
