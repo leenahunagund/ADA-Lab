@@ -41,12 +41,13 @@ void main(){
 	
 	printf("Maximum Value: %d\n",knap(n,m));
 	
-	printf("Composition:\n");
-	for(i=n;i>0;i--){
-		if (t[i][m] != t[i-1][m]){
-			printf("%d ",i);
-			m = m-w[i];
-		}
-	}
-	printf("\n");
+	printf("table:\n");
+	for(i=0;i<n+1;i++)
+    {
+        for(j=0;j<m+1;j++)
+        {
+        printf("%d\t",t[i][j]);
+        }
+        printf("\n");
+    }
 }
