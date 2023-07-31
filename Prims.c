@@ -28,7 +28,7 @@ void main(){
 		for(i=0;i<n;i++){
 			if(visited[i]){
 				for(j=0;j<n;j++){
-                    cnt++;
+                   		 cnt++;
 					if (cost[i][j]<min && !visited[j]){
 						min = cost[i][j];
 						a=i;
