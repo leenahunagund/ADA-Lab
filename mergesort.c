@@ -40,10 +40,10 @@ void merge(int *a, int *left, int *right, int l, int r)
 	}
 }
 
-int sort(int *a,int n)
+void sort(int *a,int n)
 {
 	if(n<2)
-	return count;
+	return ;
 	
 	int mid=n/2;
 	int *left=(int*)malloc(mid*sizeof(int));
@@ -57,7 +57,7 @@ int sort(int *a,int n)
 	sort(left,mid);
 	sort(right,n-mid);
 	merge(a,left,right,mid,n-mid);
-	return count;
+	//return count;
 }
 
 void worstcaseGenerator(int *a , int l , int r)
