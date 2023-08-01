@@ -1,50 +1,57 @@
-#include<stdio.h>
-#include<stdlib.h>
-#define p 10
-#define q 100
-#define r 10
-int count=0;
-int BS(int *a,int n,int ele){
-int b=0,e=n-1;
-int m;
-while(b<=e){
-  count++;
-m=(b+e)/2;
-if(a[m]==ele)
-break;
-else if(a[m]>ele)
-e=m-1;
-else
-b=m+1;
-}
-return m+1;
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int count;
+
+void binarySearch(int* arr,int key, int l, int h){
+	count++;
+	if (l<=h){
+		int mid = (h+l)/2;
+		if (arr[mid]==key) return;
+		else if (arr[mid]>key) binarySearch(arr,key,l,mid-1);
+		else binarySearch(arr,key,mid+1,h);
+	}
 }
 
+
 void main(){
-FILE *fp1,*fp2,*fp3;
-int ele,i,*a,j,x,y,z;
-fp1=fopen("bc.txt","a");
-fp2=fopen("wc.txt","a");
-fp3=fopen("ac.txt","a");
-for(i=p;i<=q;i=i+r){
-a=(int*)malloc(i*sizeof(int));
-a[0]=rand()%100;
-for(j=1;j<i;j++)
-a[j]=a[j-1]+rand()%100;
-//BEST CASE
-ele=a[0];
-x=BS(a,i,ele);
-fprintf(fp1,"%d\t%d\n",i,x);
-//WORST CASE
-ele=a[i];
-y=BS(a,i,ele);
-fprintf(fp2,"%d\t%d\n",i,y);
-//AVERAGE CASE
-ele=a[(i-1)/2+(i-1)/4];
-z=BS(a,i,ele);
-fprintf(fp3,"%d\t%d\n",i,z); 
-}system("gnuplot>load 'command.txt'");
-fclose(fp1);
-fclose(fp2);
-fclose(fp3);
-}  
+	int n,i,key;
+	int* arr;
+	
+	srand(time(0));
+	FILE *b,*w,*a;
+	system("rm b.txt w.txt a.txt");
+	
+	b = fopen("b.txt","a");
+	w = fopen("w.txt","a");
+	a = fopen("a.txt","a");
+	
+	for(n=10;n<1000;n+=10){
+		arr = (int*)malloc(n*sizeof(int));
+		
+		for(i=0;i<n;i++){
+			arr[i] = rand()%100;
+		}
+		
+		//Best Case
+		count=0;
+		key = arr[(n-1)/2] = 9999;
+		binarySearch(arr,key,0,n-1);
+		fprintf(b,"%d\t%d\n",n,count);
+		
+		//Worst Case
+		count=0;
+		key = 5555;
+		binarySearch(arr,key,0,n-1);
+		fprintf(w,"%d\t%d\n",n,count);
+		
+		//Average Case
+		count=0;
+		key = rand()%100;
+		binarySearch(arr,key,0,n-1);
+		fprintf(a,"%d\t%d\n",n,count);
+	}
+	
+	fclose(b); fclose(w); fclose(a);
+}
